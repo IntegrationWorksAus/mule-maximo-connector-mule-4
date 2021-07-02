@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+ 	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:maximo="http://www.mulesoft.org/schema/mule/maximo"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+		http://www.mulesoft.org/schema/mule/maximo http://www.mulesoft.org/schema/mule/maximo/current/mule-maximo.xsd
+		http://www.mulesoft.org/schema/mule/mtf  http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<munit:config name="exception-suite.xml" />
+	
+	<maximo:request-config name="Maximo_Request_No_Auth_Config" doc:name="Maximo Request config">
+		<maximo:maximo-connection port="443" username="test" password="test" host="maximo-demo75.mro.com"/>
+	</maximo:request-config>
+	
+	<maximo:request-config name="Maximo_Request_No_Conn_Config" doc:name="Maximo Request config">
+		<maximo:maximo-connection port="443" username="test" password="test" host="test"/>
+	</maximo:request-config>
+	
+
+	
+	<munit:test name="read-id-not-found-test" expectedErrorType="MAXIMO:RECORD_NOT_FOUND">
+		<munit:execution>
+			<maximo:read-object doc:name="Read Object" doc:id="a6dff065-476f-4b92-89b0-a426a21f7f46" config-ref="Maximo_Request_config" objectCode="mxasset">
+				<maximo:query-type>
+					<maximo:id objectId="_QVNTRVRBQkMvQkVERk9SRA--" />
+				</maximo:query-type>
+			</maximo:read-object>
+		
+</munit:execution>
+	</munit:test>
+	<mtf:tooling-test doc:name="Tooling test" name="Tooling Test">
+		<mtf:get-input-metadata doc:name="Get input metadata" parameter="inputCreateObject">
+			<maximo:create-object doc:name="Create Object" doc:id="2c4e86a4-27ca-4dd3-b2b5-8416754a6f74" config-ref="Maximo_Request_config" 
+								  objectCode="mxasset" properties="*">
+
+			</maximo:create-object>
+		</mtf:get-input-metadata>
+		<mtf:validation>
+			<munit-tools:assert doc:name="Assert expression"
+				doc:id="3dbdcbc6-195c-4b60-a45c-30ce58b7ebb8" />
+		</mtf:validation>
+	</mtf:tooling-test>
+	
+	<munit:test name="validConnectionTest">
+	    <munit:execution>
+	        <mtf:test-connectivity doc:name="Test connectivity" config-ref="Maximo_Request_config"/>
+	    </munit:execution>
+	</munit:test>
+	
+	<munit:test name="invalidConnectionTest">
+	    <munit:execution>
+	        <mtf:test-connectivity doc:name="Test connectivity" config-ref="Maximo_Request_No_Conn_Config"/>
+	    
+</munit:execution>
+	    <munit:validation>
+			<munit-tools:assert doc:name="Assert expression"
+				doc:id="5daa9eb6-a93c-4645-ba7c-ed4e84613d79" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bad-data-test" doc:id="24d2765a-f610-43e2-a090-a40b92ac8a93" expectedErrorType="MAXIMO:INVALID_INPUT">
+		<munit:execution>
+			<set-payload value="#[%dw 2.0
+output application/json
+---
+readUrl('classpath://body/request/create.assetid.15523454326.json', 'application/json')]" doc:name="Set Payload" doc:id="0d9dc087-bc78-44bc-ae66-520bcff600f1" />
+			<ee:transform doc:name="Transform Message" doc:id="1cd5998e-3ee2-4c20-88b7-9755f42a6c2b" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload filterObject !($$ ~= "spi:siteid")]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<maximo:create-object doc:name="Create Object" doc:id="1e0260ee-43d4-4ebf-b209-d9759d60ccf0" config-ref="Default_Request_Config" objectCode="mxasset" transactionId="123415" properties="*"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert doc:name="Assert expression"
+				doc:id="ca2a6fe7-f42b-4cf4-8f93-cc2ca8b8e2e6" />
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

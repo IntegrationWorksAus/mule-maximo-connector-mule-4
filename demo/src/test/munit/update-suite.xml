@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:maximo="http://www.mulesoft.org/schema/mule/maximo"
+	xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" 
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" 
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+			   http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+			   http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+			   http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+			   http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+			   http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+			   http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+			   http://www.mulesoft.org/schema/mule/maximo http://www.mulesoft.org/schema/mule/maximo/current/mule-maximo.xsd">
+
+	<munit:config name="test-config" />
+	
+	<munit:before-test name="create-before-test" doc:id="b60afff9-fb59-43d2-906c-b263246b4a78" >
+		<set-payload value="#[%dw 2.0
+output application/json
+---
+readUrl('classpath://body/request/create.assetid.15523454326.json', 'application/json')]" doc:name="Set Payload" doc:id="14262995-5ffc-42a4-94e4-0187a63c6570" />
+		<maximo:create-object doc:name="Create Object" doc:id="aadd8552-556f-42c9-963b-00608f422f21" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" properties="*" transactionId="123415">
+		</maximo:create-object>
+	</munit:before-test>
+	
+	<munit:after-test name="delete-after-test" doc:id="cefb5bcd-3ca3-44e5-9701-221d10f3a873" >
+		<maximo:remove-object doc:name="Remove Object" doc:id="b9ff98fc-40c7-4c8e-b303-1aa75e0ee2a9" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" id="_QVNTRVRBQkMvQkVERk9SRA--"/>
+	</munit:after-test>
+	<munit:test name="update-object-test" doc:id="8c391729-5fc5-48ec-865c-13e1db7d5685" description="Test">
+		<munit:execution>
+			<set-payload value='#[%dw 2.0
+output application/json
+---
+{
+    "spi:assettype": "BUS"
+}]' doc:name="Set Payload" doc:id="bb9222c1-0938-46f1-9b40-50968d411565" />
+			<maximo:update-object doc:name="Update Object" 	 doc:id="85a14a2a-4af3-4dc4-8353-eed08544fe4d" config-ref="Maximo_Request_config" 
+								  objectCode="mxasset" id="_QVNTRVRBQkMvQkVERk9SRA--" properties="*" allowEvents="false" patchType="true">
+				<ee:repeatable-file-store-stream bufferUnit="MB" />
+			</maximo:update-object>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="3abd517a-ffcc-428f-b1d5-2a137dd6181b" actual='#[payload."spi:assettype_description"]' expected='#["Passenger Bus"]' message="Success" />
+		</munit:validation>
+	</munit:test>
+
+</mule>

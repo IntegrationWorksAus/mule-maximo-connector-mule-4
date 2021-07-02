@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	  xmlns="http://www.mulesoft.org/schema/mule/core" 
+	  xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	  xmlns:maximo="http://www.mulesoft.org/schema/mule/maximo"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core 
+	  					  http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+						  http://www.mulesoft.org/schema/mule/maximo 
+						  http://www.mulesoft.org/schema/mule/maximo/current/mule-maximo.xsd
+						  http://www.mulesoft.org/schema/mule/http 
+						  http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+						  http://www.mulesoft.org/schema/mule/ee/core 
+						  http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<maximo:request-config name="Default_Request_Config" doc:name="Default Request config" doc:id="6a9abdeb-e631-4a9d-9967-22a79dbc497b" >
+		<maximo:maximo-connection port="443" username="maximo" password="maximo1" host="maximo-demo75.mro.com"/>
+	</maximo:request-config>
+</mule>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:maximo="http://www.mulesoft.org/schema/mule/maximo"
+	xmlns:mtf="http://www.mulesoft.org/schema/mule/mtf" 
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" 
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+			   http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+			   http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+			   http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+			   http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+			   http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+			   http://www.mulesoft.org/schema/mule/mtf http://www.mulesoft.org/schema/mule/mtf/current/mule-mtf.xsd
+			   http://www.mulesoft.org/schema/mule/maximo http://www.mulesoft.org/schema/mule/maximo/current/mule-maximo.xsd">
+
+	<munit:config name="test-config" />
+	
+	<munit:before-suite name="create-before-read-suite" doc:id="1f10578e-ab71-4a62-8b07-136edc31ecb7" >
+		<set-payload value="#[%dw 2.0
+output application/json
+---
+readUrl('classpath://body/request/create.assetid.15523454326.json', 'application/json')]" doc:name="Set Payload" doc:id="a388673a-53ca-41de-84b5-9dc3f580c506" />
+		<maximo:create-object doc:name="Create Object" doc:id="116183ac-f43b-4bbf-afd2-d3dfa5816e5d" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" properties="*" transactionId="123415">
+		</maximo:create-object>
+	</munit:before-suite>
+	
+	<munit:after-suite name="delete-after-read-suite" doc:id="d670baed-2b66-4dec-b67e-f5109adbb8c9" >
+		<maximo:remove-object doc:name="Remove Object" doc:id="a86e4d57-9233-420e-968c-01dc33ed8cb4" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" id="_QVNTRVRBQkMvQkVERk9SRA--"/>
+	</munit:after-suite>
+	<munit:test name="read-id-test" doc:id="475ba3bd-ff28-4cd5-a4a1-06a1e23b6a9c">
+		<munit:execution>
+			<maximo:read-object doc:name="Read Object" doc:id="0584bce6-3f5b-442b-a2fa-71dab429f12d" config-ref="Maximo_Request_config" objectCode="mxasset">
+				<maximo:query-type >
+					<maximo:id objectId="_QVNTRVRBQkMvQkVERk9SRA--"/>
+				</maximo:query-type>
+			</maximo:read-object>
+			<ee:transform doc:name="Transform Message" doc:id="70066562-5e32-4395-b789-5f2bce160d9d">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload filterObject !($$ ~= "_rowstamp" or
+                       $$ ~= "spi:statusdate" or
+                       $$ ~= "spi:changedate" or
+                       $$ ~= "prefixes")]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="6929bee5-b98e-4a40-9362-8aa0954ea2df" actual="#[payload]" expected="#[readUrl('classpath://body/response/get.assetid.15523454326.response.json', 'application/json').&quot;rdfs:member&quot;[0]]" message="Success" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="read-object-all-params-test" doc:id="d6c8e91d-97d4-42ff-9772-208b033c2d49" description="Test">
+		<munit:execution>
+			<maximo:read-object doc:name="Read Object" doc:id="9f3ce5b2-75c1-467a-80f9-3b5c2236e3ab" config-ref="Maximo_Request_config" 
+								objectCode="mxasset">
+				<maximo:query-type >
+					<maximo:filter select="*" orderBy="-assetnum" pageSize="1" where="assetid=15523454326"/>
+				</maximo:query-type>
+			</maximo:read-object>
+			<ee:transform doc:name="Transform Message" doc:id="1a0c2bd2-26e0-41dd-ae10-ea5393f05d04">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload mapObject (
+    if ($$ ~= "rdfs:member")
+        {($$): payload."rdfs:member" map ($ filterObject !(
+                        $$ ~= "_rowstamp" or
+                        $$ ~= "spi:statusdate" or
+                        $$ ~= "spi:changedate"))
+        }
+    else
+        {($$): $}
+)]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="826d56c6-dd75-4961-bb0e-1b355be6c7f7" actual="#[payload]" expected="#[readUrl('classpath://orderBy.PageSize.json', 'application/json')]" message="Success" />
+		</munit:validation>
+	</munit:test>
+	
+	<munit:test name="read-object-select+where-test" doc:id="84d033a4-552f-4561-a318-2e1a4f6d60c6" description="Test">
+		<munit:execution>
+			<maximo:read-object doc:name="Read Object" doc:id="2d1fb77e-3ce8-4139-80df-74fd9c0ef459" config-ref="Maximo_Request_config" 
+								objectCode="mxasset">
+				<maximo:query-type >
+					<maximo:filter select="*" where="assetid=15523454326"/>
+				</maximo:query-type>
+			</maximo:read-object>
+			<ee:transform doc:name="Transform Message" doc:id="071e74f4-225b-4059-8fdc-392168a353e4">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload mapObject (
+    if ($$ ~= "rdfs:member")
+        {($$): payload."rdfs:member" map ($ filterObject !(
+                        $$ ~= "_rowstamp" or
+                        $$ ~= "spi:statusdate" or
+                        $$ ~= "spi:changedate"))
+        }
+    else
+        {($$): $}
+)]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="2ab4d0ad-a9a2-4b9f-8413-21d48f5a9ae0" actual="#[payload]" expected="#[readUrl('classpath://body/response/get.assetid.15523454326.response.json', 'application/json')]" message="Success" />
+		</munit:validation>
+	</munit:test>
+
+</mule>

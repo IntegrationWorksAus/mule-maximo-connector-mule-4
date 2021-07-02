@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	  xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	  xmlns:maximo="http://www.mulesoft.org/schema/mule/maximo" 
+	  xmlns="http://www.mulesoft.org/schema/mule/core" 
+	  xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core 
+	  					  http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+						  http://www.mulesoft.org/schema/mule/maximo 
+						  http://www.mulesoft.org/schema/mule/maximo/current/mule-maximo.xsd
+						  http://www.mulesoft.org/schema/mule/http 
+						  http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+						  http://www.mulesoft.org/schema/mule/ee/core 
+						  http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+	<http:listener-config name="Listener_Config" doc:name="HTTP Listener config" doc:id="019f0b2f-7153-4a53-a5db-336e5ee3e16e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<maximo:request-config name="Maximo_Request_config" doc:name="Maximo Request config" doc:id="44b0ef72-5c1b-4bc6-9a72-aa152c1a7603" >
+		<maximo:maximo-connection port="443" username="maximo" password="maximo1" host="maximo-demo75.mro.com"/>
+	</maximo:request-config>
+	<flow name="create-object-flow" doc:id="89e44103-f15f-47a4-bb08-8418341bc4d7" >
+		<http:listener doc:name="Listener" doc:id="a32c9178-c6c5-487a-92a4-5899578e2ffb" config-ref="Listener_Config" path="/create">
+		</http:listener>
+		<maximo:create-object doc:name="Create Object" doc:id="86a33323-86fc-4059-9a4e-e0cf14801c4f" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" properties="*" transactionId="123415">
+		</maximo:create-object>
+	</flow>
+	<flow name="update-object-flow" doc:id="1989ced1-0c33-4871-8033-cc1613da4979" >
+		<http:listener doc:name="Listener" doc:id="49455e4b-dc56-4c6b-a4d3-d12d9c84e06b" config-ref="Listener_Config" path="/update"/>
+		<maximo:update-object doc:name="Update Object" 	 doc:id="53b3d6e5-0516-4dbb-a999-2c4fef1d1688" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" id="_QVNTRVRBQkMvQkVERk9SRA--" properties="*" allowEvents="false" patchType="true">
+			<ee:repeatable-file-store-stream bufferUnit="MB" />
+		</maximo:update-object>
+	
+</flow>
+	<flow name="read-object-flow" doc:id="a6bc4ff7-4ad4-4aab-8484-9736eb1bae06" >
+		<http:listener doc:name="Listener" doc:id="f943ac1c-951d-4bfc-9067-6036bf6de0b7" config-ref="Listener_Config" path="/read"/>
+		<maximo:read-object doc:name="Read Object" doc:id="1e620730-e342-45cc-b851-b840c45f0b11" config-ref="Maximo_Request_config" 
+							objectCode="mxasset">
+			<maximo:query-type >
+				<maximo:filter select="*" where="assetid=15523454326"/>
+			</maximo:query-type>
+		</maximo:read-object>
+	</flow>
+	<flow name="remove-object-flow" doc:id="94a6ffd2-8fcd-4de9-9fbe-8afcdb9b7b34" >
+		<http:listener doc:name="Listener" doc:id="5264b7d3-492f-459b-9e60-69e0d8997712" config-ref="Listener_Config" path="/remove"/>
+		<maximo:remove-object doc:name="Remove Object" doc:id="4198935d-3161-4f32-8c20-afd629d61618" config-ref="Maximo_Request_config" 
+							  objectCode="mxasset" id="_QVNTRVRBQkMvQkVERk9SRA--"/>
+	</flow>
+</mule>

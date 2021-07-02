@@ -1,0 +1,23 @@
+{
+    "Links": {},
+    "Items": [{
+            "WebId": "F1DPHupPiOYrbkSzs8yXIefEgwBwAAAATEFQVE9QLUQzSklEVDNVXEJBOkxFVkVMLjE",
+            "Name": "BA:LEVEL.1",
+            "Path": "\\\\LAPTOP-D3JIDT3U\\BA:LEVEL.1",
+            "Links": {
+                "Self": "https://laptop-d3jidt3u/piwebapi/points/F1DPHupPiOYrbkSzs8yXIefEgwBwAAAATEFQVE9QLUQzSklEVDNVXEJBOkxFVkVMLjE"
+            },
+            "Items": [{
+                    "Timestamp": "2020-10-12T15:32:13Z",
+                    "Value": 1332.3,
+                    "UnitsAbbreviation": "",
+                    "Good": true,
+                    "Questionable": false,
+                    "Substituted": false,
+                    "Annotated": false
+                }
+            ],
+            "UnitsAbbreviation": ""
+        }
+    ]
+}

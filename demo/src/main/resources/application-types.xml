@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="create-response" format="json">
+      <types:shape format="weave" example="examples/create.15523454326.response.json"><![CDATA[%dw 2.0
+
+type create_response = {|
+  "spi:autowogen": Boolean, 
+  "spi:itemsetid": String, 
+  "spi:iscalibration": Boolean, 
+  "spi:assetnum": String, 
+  "spi:removefromactivesp": Boolean, 
+  assetspec_collectionref: String, 
+  "spi:siteid": String, 
+  "spi:tloampartition": Boolean, 
+  "spi:assettype": String, 
+  "spi:budgetcost": Number {"typeId": "double"}, 
+  "spi:disabled": Boolean, 
+  "spi:isrunning": Boolean, 
+  "rdf:about": String, 
+  "spi:changepmstatus": Boolean, 
+  "spi:totunchargedcost": Number {"typeId": "double"}, 
+  "spi:invcost": Number {"typeId": "double"}, 
+  "spi:moved": Boolean, 
+  "spi:status_description": String, 
+  assetopskd_collectionref: String, 
+  "spi:pluscismte": Boolean, 
+  "spi:pluscsolution": Boolean, 
+  assetmeter_collectionref: String, 
+  "spi:status": String, 
+  "spi:pluscisinhousecal": Boolean, 
+  "spi:changeby": String, 
+  "spi:orgid": String, 
+  "spi:assetid": Number {"typeId": "double"}, 
+  "spi:unchargedcost": Number {"typeId": "double"}, 
+  assetusercust_collectionref: String, 
+  "spi:expectedlife": Number {"typeId": "int"}, 
+  "spi:ytdcost": Number {"typeId": "double"}, 
+  "spi:rolltoallchildren": Boolean, 
+  "spi:pluscpmextdate": Boolean, 
+  "spi:totdowntime": Number {"typeId": "double"}, 
+  "spi:islinear": Boolean, 
+  "spi:mainthierchy": Boolean, 
+  "spi:totalcost": Number {"typeId": "double"}, 
+  "spi:newsite": String, 
+  "spi:description": String, 
+  "spi:plusciscontam": Boolean, 
+  "spi:returnedtovendor": Boolean, 
+  "spi:children": Boolean, 
+  prefixes: {|
+    rdf: String, 
+    spi: String, 
+    oslc: String
+  |}, 
+  "spi:replacecost": Number {"typeId": "double"}, 
+  assetmntskd_collectionref: String, 
+  "spi:removefromactiveroutes": Boolean, 
+  "spi:assettype_description": String, 
+  "spi:purchaseprice": Number {"typeId": "double"}
+|} {"example": "{\\\"spi:autowogen\\\":false,\\\"spi:itemsetid\\\":\\\"SET1\\\",\\\"spi:iscalibration\\\":false,\\\"spi:assetnum\\\":\\\"ASSETABC\\\",\\\"spi:removefromactivesp\\\":false,\\\"assetspec_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetspecclass\\\",\\\"spi:siteid\\\":\\\"BEDFORD\\\",\\\"spi:tloampartition\\\":false,\\\"spi:assettype\\\":\\\"PRODUCTION\\\",\\\"spi:budgetcost\\\":0.0,\\\"spi:disabled\\\":false,\\\"spi:isrunning\\\":true,\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\\",\\\"spi:changepmstatus\\\":false,\\\"spi:totunchargedcost\\\":0.0,\\\"spi:invcost\\\":0.0,\\\"spi:moved\\\":false,\\\"spi:status_description\\\":\\\"Operating\\\",\\\"assetopskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetopskd\\\",\\\"spi:pluscismte\\\":false,\\\"spi:pluscsolution\\\":false,\\\"assetmeter_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\/int_assetmeter\\\",\\\"spi:status\\\":\\\"OPERATING\\\",\\\"spi:pluscisinhousecal\\\":false,\\\"spi:changeby\\\":\\\"MAXIMO\\\",\\\"spi:orgid\\\":\\\"EAGLENA\\\",\\\"spi:assetid\\\":15523454326,\\\"spi:unchargedcost\\\":0.0,\\\"assetusercust_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetusercust\\\",\\\"spi:expectedlife\\\":0,\\\"spi:ytdcost\\\":0.0,\\\"spi:rolltoallchildren\\\":false,\\\"spi:pluscpmextdate\\\":false,\\\"spi:totdowntime\\\":0.0,\\\"spi:islinear\\\":false,\\\"spi:mainthierchy\\\":false,\\\"spi:totalcost\\\":0.0,\\\"spi:newsite\\\":\\\"BEDFORD\\\",\\\"spi:description\\\":\\\"Asset 1\\\",\\\"spi:plusciscontam\\\":false,\\\"spi:returnedtovendor\\\":false,\\\"spi:children\\\":true,\\\"prefixes\\\":{\\\"rdf\\\":\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\",\\\"spi\\\":\\\"http:\\/\\/jazz.net\\/ns\\/ism\\/asset\\/smarter_physical_infrastructure#\\\",\\\"oslc\\\":\\\"http:\\/\\/open-services.net\\/ns\\/core#\\\"},\\\"spi:replacecost\\\":0.0,\\\"assetmntskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetmntskd\\\",\\\"spi:removefromactiveroutes\\\":false,\\\"spi:assettype_description\\\":\\\"Production Assets\\\",\\\"spi:purchaseprice\\\":0.0}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="read-response" format="json">
+      <types:shape format="weave" example="examples/read.response.metadata.json"><![CDATA[%dw 2.0
+
+type read_response = {|
+  prefixes: {|
+    rdf: String, 
+    rdfs: String, 
+    spi: String, 
+    oslc: String
+  |}, 
+  "oslc:responseInfo": {| "rdf:about": String |}, 
+  "rdfs:member": Array<{|    "spi:autowogen": Boolean,     "spi:itemsetid": String,     "_rowstamp": String,     "spi:iscalibration": Boolean,     "spi:assetnum": String,     "spi:removefromactivesp": Boolean,     assetspec_collectionref: String,     "spi:siteid": String,     "spi:tloampartition": Boolean,     "spi:assettype": String,     "spi:budgetcost": Number {"typeId": "double"},     "spi:disabled": Boolean,     "spi:isrunning": Boolean,     "rdf:about": String,     "spi:changepmstatus": Boolean,     "spi:totunchargedcost": Number {"typeId": "double"},     "spi:invcost": Number {"typeId": "double"},     "spi:moved": Boolean,     "spi:status_description": String,     assetopskd_collectionref: String,     "spi:pluscismte": Boolean,     "spi:pluscsolution": Boolean,     assetmeter_collectionref: String,     "spi:status": String,     "spi:pluscisinhousecal": Boolean,     "spi:changeby": String,     "spi:orgid": String,     "spi:assetid": Number {"typeId": "double"},     "spi:unchargedcost": Number {"typeId": "double"},     assetusercust_collectionref: String,     "spi:expectedlife": Number {"typeId": "int"},     "spi:ytdcost": Number {"typeId": "double"},     "spi:rolltoallchildren": Boolean,     "spi:pluscpmextdate": Boolean,     "spi:totdowntime": Number {"typeId": "double"},     "spi:islinear": Boolean,     "spi:mainthierchy": Boolean,     "spi:statusdate": String,     "spi:totalcost": Number {"typeId": "double"},     "spi:newsite": String,     "spi:description": String,     "spi:plusciscontam": Boolean,     "spi:returnedtovendor": Boolean,     "spi:children": Boolean,     "spi:replacecost": Number {"typeId": "double"},     assetmntskd_collectionref: String,     "spi:changedate": String,     "spi:removefromactiveroutes": Boolean,     "spi:assettype_description": String,     "spi:purchaseprice": Number {"typeId": "double"}  |}>, 
+  "rdf:about": String
+|} {"example": "{\\\"prefixes\\\":{\\\"rdf\\\":\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\",\\\"rdfs\\\":\\\"http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#\\\",\\\"spi\\\":\\\"http:\\/\\/jazz.net\\/ns\\/ism\\/asset\\/smarter_physical_infrastructure#\\\",\\\"oslc\\\":\\\"http:\\/\\/open-services.net\\/ns\\/core#\\\"},\\\"oslc:responseInfo\\\":{\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET?oslc.select=*&oslc.where=assetid=15523454326\\\"},\\\"rdfs:member\\\":[{\\\"spi:autowogen\\\":false,\\\"spi:itemsetid\\\":\\\"SET1\\\",\\\"_rowstamp\\\":\\\"1547683\\\",\\\"spi:iscalibration\\\":false,\\\"spi:assetnum\\\":\\\"ASSETABC\\\",\\\"spi:removefromactivesp\\\":false,\\\"assetspec_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetspecclass\\\",\\\"spi:siteid\\\":\\\"BEDFORD\\\",\\\"spi:tloampartition\\\":false,\\\"spi:assettype\\\":\\\"PRODUCTION\\\",\\\"spi:budgetcost\\\":0.0,\\\"spi:disabled\\\":false,\\\"spi:isrunning\\\":true,\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\\",\\\"spi:changepmstatus\\\":false,\\\"spi:totunchargedcost\\\":0.0,\\\"spi:invcost\\\":0.0,\\\"spi:moved\\\":false,\\\"spi:status_description\\\":\\\"Operating\\\",\\\"assetopskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetopskd\\\",\\\"spi:pluscismte\\\":false,\\\"spi:pluscsolution\\\":false,\\\"assetmeter_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/int_assetmeter\\\",\\\"spi:status\\\":\\\"OPERATING\\\",\\\"spi:pluscisinhousecal\\\":false,\\\"spi:changeby\\\":\\\"MAXIMO\\\",\\\"spi:orgid\\\":\\\"EAGLENA\\\",\\\"spi:assetid\\\":15523454326,\\\"spi:unchargedcost\\\":0.0,\\\"assetusercust_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetusercust\\\",\\\"spi:expectedlife\\\":0,\\\"spi:ytdcost\\\":0.0,\\\"spi:rolltoallchildren\\\":false,\\\"spi:pluscpmextdate\\\":false,\\\"spi:totdowntime\\\":0.0,\\\"spi:islinear\\\":false,\\\"spi:mainthierchy\\\":false,\\\"spi:statusdate\\\":\\\"2021-04-01T02:37:29-04:00\\\",\\\"spi:totalcost\\\":0.0,\\\"spi:newsite\\\":\\\"BEDFORD\\\",\\\"spi:description\\\":\\\"Asset 1\\\",\\\"spi:plusciscontam\\\":false,\\\"spi:returnedtovendor\\\":false,\\\"spi:children\\\":true,\\\"spi:replacecost\\\":0.0,\\\"assetmntskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetmntskd\\\",\\\"spi:changedate\\\":\\\"2021-04-01T02:37:29-04:00\\\",\\\"spi:removefromactiveroutes\\\":false,\\\"spi:assettype_description\\\":\\\"Production Assets\\\",\\\"spi:purchaseprice\\\":0.0}],\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/MXASSET\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="read-response-corrected" format="json">
+      <types:shape format="weave" example="examples/response.15523454326.json"><![CDATA[%dw 2.0
+
+type read_response_corrected = {|
+  prefixes: {|
+    rdf: String, 
+    rdfs: String, 
+    spi: String, 
+    oslc: String
+  |}, 
+  "oslc:responseInfo": {| "rdf:about": String |}, 
+  "rdfs:member": Array<{|    "spi:autowogen": Boolean,     "spi:itemsetid": String,     "spi:iscalibration": Boolean,     "spi:assetnum": String,     "spi:removefromactivesp": Boolean,     assetspec_collectionref: String,     "spi:siteid": String,     "spi:tloampartition": Boolean,     "spi:assettype": String,     "spi:budgetcost": Number {"typeId": "double"},     "spi:disabled": Boolean,     "spi:isrunning": Boolean,     "rdf:about": String,     "spi:changepmstatus": Boolean,     "spi:totunchargedcost": Number {"typeId": "double"},     "spi:invcost": Number {"typeId": "double"},     "spi:moved": Boolean,     "spi:status_description": String,     assetopskd_collectionref: String,     "spi:pluscismte": Boolean,     "spi:pluscsolution": Boolean,     assetmeter_collectionref: String,     "spi:status": String,     "spi:pluscisinhousecal": Boolean,     "spi:changeby": String,     "spi:orgid": String,     "spi:assetid": Number {"typeId": "double"},     "spi:unchargedcost": Number {"typeId": "double"},     assetusercust_collectionref: String,     "spi:expectedlife": Number {"typeId": "int"},     "spi:ytdcost": Number {"typeId": "double"},     "spi:rolltoallchildren": Boolean,     "spi:pluscpmextdate": Boolean,     "spi:totdowntime": Number {"typeId": "double"},     "spi:islinear": Boolean,     "spi:mainthierchy": Boolean,     "spi:totalcost": Number {"typeId": "double"},     "spi:newsite": String,     "spi:description": String,     "spi:plusciscontam": Boolean,     "spi:returnedtovendor": Boolean,     "spi:children": Boolean,     "spi:replacecost": Number {"typeId": "double"},     assetmntskd_collectionref: String,     "spi:removefromactiveroutes": Boolean,     "spi:assettype_description": String,     "spi:purchaseprice": Number {"typeId": "double"}  |}>, 
+  "rdf:about": String
+|} {"example": "{\\\"prefixes\\\":{\\\"rdf\\\":\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\",\\\"rdfs\\\":\\\"http:\\/\\/www.w3.org\\/2000\\/01\\/rdf-schema#\\\",\\\"spi\\\":\\\"http:\\/\\/jazz.net\\/ns\\/ism\\/asset\\/smarter_physical_infrastructure#\\\",\\\"oslc\\\":\\\"http:\\/\\/open-services.net\\/ns\\/core#\\\"},\\\"oslc:responseInfo\\\":{\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset?oslc.select=%2A&oslc.where=assetid%3D15523454326\\\"},\\\"rdfs:member\\\":[{\\\"spi:autowogen\\\":false,\\\"spi:itemsetid\\\":\\\"SET1\\\",\\\"spi:iscalibration\\\":false,\\\"spi:assetnum\\\":\\\"ASSETABC\\\",\\\"spi:removefromactivesp\\\":false,\\\"assetspec_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetspecclass\\\",\\\"spi:siteid\\\":\\\"BEDFORD\\\",\\\"spi:tloampartition\\\":false,\\\"spi:assettype\\\":\\\"PRODUCTION\\\",\\\"spi:budgetcost\\\":0.0,\\\"spi:disabled\\\":false,\\\"spi:isrunning\\\":true,\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\\",\\\"spi:changepmstatus\\\":false,\\\"spi:totunchargedcost\\\":0.0,\\\"spi:invcost\\\":0.0,\\\"spi:moved\\\":false,\\\"spi:status_description\\\":\\\"Operating\\\",\\\"assetopskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetopskd\\\",\\\"spi:pluscismte\\\":false,\\\"spi:pluscsolution\\\":false,\\\"assetmeter_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/int_assetmeter\\\",\\\"spi:status\\\":\\\"OPERATING\\\",\\\"spi:pluscisinhousecal\\\":false,\\\"spi:changeby\\\":\\\"MAXIMO\\\",\\\"spi:orgid\\\":\\\"EAGLENA\\\",\\\"spi:assetid\\\":15523454326,\\\"spi:unchargedcost\\\":0.0,\\\"assetusercust_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetusercust\\\",\\\"spi:expectedlife\\\":0,\\\"spi:ytdcost\\\":0.0,\\\"spi:rolltoallchildren\\\":false,\\\"spi:pluscpmextdate\\\":false,\\\"spi:totdowntime\\\":0.0,\\\"spi:islinear\\\":false,\\\"spi:mainthierchy\\\":false,\\\"spi:totalcost\\\":0.0,\\\"spi:newsite\\\":\\\"BEDFORD\\\",\\\"spi:description\\\":\\\"Asset 1\\\",\\\"spi:plusciscontam\\\":false,\\\"spi:returnedtovendor\\\":false,\\\"spi:children\\\":true,\\\"spi:replacecost\\\":0.0,\\\"assetmntskd_collectionref\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\/_QVNTRVRBQkMvQkVERk9SRA--\\/assetmntskd\\\",\\\"spi:removefromactiveroutes\\\":false,\\\"spi:assettype_description\\\":\\\"Production Assets\\\",\\\"spi:purchaseprice\\\":0.0}],\\\"rdf:about\\\":\\\"http:\\/\\/nothing\\/os\\/mxasset\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#4bc05e40-0245-40fb-98ed-f3b64d53b016"/>
+  <types:enrichment select="#b4c3dbf8-145e-4614-8140-065cbdbe41e0">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="create-response"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#5bce0b4e-c4d3-41b9-98cb-1386b2022c26">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="read-response"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="read-response-corrected"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
