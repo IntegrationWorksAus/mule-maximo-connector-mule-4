@@ -1,33 +1,33 @@
-* = Maximo Connector Release Notes
+= Maximo Connector Release Notes
   :keywords: maximo, IBM, IBM Maximo, mulesoft, Integration Works
 
-  The Anypoint Maximo connector provides the capability to connect a Mule app with the IBM Maximo Server. The MuleSoft support category for Maximo connector is link:https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-connectors[MuleSoft Certified].
+The Anypoint Maximo connector provides the capability to connect a Mule app with the IBM Maximo Server. The MuleSoft support category for Maximo connector is link:https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-connectors[MuleSoft Certified].
 
-  link::https://github.com/IntegrationWorksAus/mule-maximo-connector-mule-4/tree/main/user-manual.adoc[Maximo Connector User Guide]
+link:https://github.com/IntegrationWorksAus/mule-maximo-connector-mule-4/tree/main/user-manual.adoc[Maximo Connector User Guide]
 
-  === Version 1.0.0 Compatibility
+=== Version 1.0.0 Compatibility
 
-  Maximo connector is available on Mule 4.3.X or later.
+Maximo connector is available on Mule 4.3.X or later.
 
-  [%header%autowidth]
-  |===
-  |Application/Service    |Version
-  |Mule Runtime           |  4.3.x
-  |Maximo Web API         |  PI Web API 2020 or later.
-  |Java                   |  1.8 or later
-  |Anypoint Studio        |  7.x
-  |===
+[%header%autowidth]
+|===
+|Application/Service    |Version
+|Mule Runtime           |  4.3.x
+|Maximo Web API         |  PI Web API 2020 or later.
+|Java                   |  1.8 or later
+|Anypoint Studio        |  7.x
+|===
   
   
-  ==== Key Features
+==== Key Features
   
-  The Maximo connector supports basic Create, Read, Update, and Delete operations for assets on a Maximo Server.
+The Maximo connector supports basic Create, Read, Update, and Delete operations for assets on a Maximo Server.
   
-  === 1.0.0 Known Issues
+=== 1.0.0 Known Issues
   
-  - Dynamic metadata rendering in datasense does not evaluate URL references
+- Dynamic metadata rendering in datasense does not evaluate URL references
   
-  === Support Resources
+=== Support Resources
   
   * Contact IntegrationWorks Australia at mailto:maximoconnector@integration.works[Maximo Connector Support Email].
   * Learn how to link:https://docs.mulesoft.com/studio/7.7/add-modules-in-studio-to[Install Anypoint Connectors] using Anypoint Exchange.
