@@ -21,11 +21,11 @@ Maximo connector is available on Mule 4.3.X or later.
   
 ==== Key Features
   
-The Maximo connector supports basic Create, Read, Update, and Delete operations for assets on a Maximo Server.
+The Maximo connector supports basic Create, Read, Update, and Delete operations for assets on a Maximo Server
   
 === 1.0.0 Known Issues
   
-- Dynamic metadata rendering in datasense does not evaluate URL references
+- Dynamic metadata rendering in datasense does not evaluate URL references.
   
 === Support Resources
   
